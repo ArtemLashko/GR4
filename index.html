@@ -1,126 +1,231 @@
 <!DOCTYPE html>
-<html>
-<head>
-<style>
-html{
-    background-color: #141414;
-}
-.frame {
-  display: flex;
-  background-color: #d9d9d9;
-  height: 56px;
-  position: relative;
-  width: 100%;
-}
-.left_menu{
-  align-self: left;
-  display: flex; /* or inline-flex */
-  align-items: center;
-  justify-content: center;
-  width: 10%;
-  height: 100%;
-  gap: 50px;
-}
-.location_profile{
-  align-self: left;
-  display: flex; /* or inline-flex */
-  align-items: center;
-  justify-content: center;
-  width: 15%;
-  height: 100%;
-}
-.location-pointer{
-  height: 23.64px;
-  width: 23px;
-}
-.left_menu img{
-  height: 32px;
-  width: 32px;
-  border-radius: 8px;
-  box-shadow: 1px 1px 1px 1px gray;
-}
-.profile {
-  margin-left: 10px;
-  height: 32px;
-  width: 32px;
-  border-radius: 8px;
-  box-shadow: 1px 1px 1px 1px gray;
-}
-.left_menu img:hover{
-  box-shadow: 0 0 0px 1px black;
-}
-.search_field{
-  align-self: center;
-  justify-self: center;
-  margin: auto;
-}
-.search_bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  height: 30px;
-  border-radius: 15px;
-  border: 2px solid gray;
-
-  /* This will add some padding and margin to the text field */
-  padding: 5px;
-  background-color: #FFFFFF;
-}
-.search_icon_div{
-  align-self: left;
-  padding-left: 1px;
-  padding-right: 2px;
-  justify-self: center;
-}
-.clear_icon_div{
-  align-self: flex-end;
-  padding-right: 1px;
-  padding-left: 2px;
-  justify-self: center;
-}
-.search_icon{
-  height: 23.64px;
-  width: 23px;
-}
-.clear_icon{
-  height: 23.64px;
-  width: 23px;
-}
-.search_bar input{
-  background-color: #FFFFFF;
-  align-self: center;
-  border: none;
-  width: 100%;
-  height: 100%;
-}
-</style>
 </head>
+<link rel="stylesheet" href="style.css" />
+</head>
+
 <body>
 
-<div class="frame">
-  <div class="left_menu">
-    <img class="home" alt="Home" src="home.png" />
- <img class="transaction-list" alt="Transaction list" src="transaction-list.png" />
-  </div>
-  <div class="search_field">
-    <div class="search_bar">
-      <div class ="search_icon_div">
-        <img alt="Search icon" class="search_icon" src="search-icon.png" />
-      </div>
-      <input type="text">
-      <div class="clear_icon_div">
-        <img alt="Clear button" class="clear_icon" src="clear-button-1.png" />
+  <div class="frame">
+    <div class="left_menu">
+      <img class="home" alt="Home" src="home.png" />
+      <img class="transaction-list" alt="Transaction list" src="transaction-list.png" />
+    </div>
+    <div class="search_field">
+      <div class="search_bar">
+        <div class="search_icon_div">
+          <img alt="Search icon" class="search_icon" src="search-icon.png" />
+        </div>
+        <input type="text">
+        <div class="clear_icon_div">
+          <img alt="Clear button" class="clear_icon" src="clear-button-1.png" />
+        </div>
       </div>
     </div>
+    <div class="location_profile">
+      <img class="location-pointer" alt="Location pointer" src="location-pointer.png" />
+      <p>520 Monroe ln, Chicago, Illinois</p>
+      <img class="profile" alt="Profile" src="profile.png" /> <!-- might not need this -->
     </div>
-  <div class="location_profile">
-    <img class="location-pointer" alt="Location pointer" src="location-pointer.png" />
-    <p>520 Monroe ln, Chicago, Illinois</p>
-    <img class="profile" alt="Profile" src="profile.png" />
   </div>
-</div>
+  <div>
+    <table id="layout">
+      <tr>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <input type="button" class="btn" value="+Add">
+            </input>
+            <div>
+              Name: Store1
+            </div>
+            <div>
+              Type: Franchise
+            </div>
+            <div>
+              Distance: 5mi
+            </div>
+            <div>
+              Price: $$
+            </div>
+            <div>
+              Rating: 4.1
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 </body>
+
 </html>
-
-
