@@ -1,0 +1,124 @@
+html {
+  background-color: #ffffff;
+}
+.frame {
+  display: flex;
+  background-color: #d9d9d9;
+  height: 56px;
+  position: relative;
+  width: 100%;
+}
+.left_menu {
+  align-self: left;
+  display: flex; /* or inline-flex */
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  height: 100%;
+  gap: 50px;
+}
+.location_profile {
+  align-self: left;
+  display: flex; /* or inline-flex */
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  height: 100%;
+}
+.location-pointer {
+  height: 23.64px;
+  width: 23px;
+}
+.left_menu img {
+  height: 32px;
+  width: 32px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 1px gray;
+}
+.profile {
+  margin-left: 10px;
+  height: 32px;
+  width: 32px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 1px gray;
+}
+.left_menu img:hover {
+  box-shadow: 0 0 0px 1px black;
+}
+.search_field {
+  align-self: center;
+  justify-self: center;
+  margin: auto;
+}
+.search_bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 30px;
+  border-radius: 15px;
+  border: 2px solid gray;
+
+  /* This will add some padding and margin to the text field */
+  padding: 5px;
+  background-color: #ffffff;
+}
+.search_icon_div {
+  align-self: left;
+  padding-left: 1px;
+  padding-right: 2px;
+  justify-self: center;
+}
+.clear_icon_div {
+  align-self: flex-end;
+  padding-right: 1px;
+  padding-left: 2px;
+  justify-self: center;
+}
+.search_icon {
+  height: 23.64px;
+  width: 23px;
+}
+.clear_icon {
+  height: 23.64px;
+  width: 23px;
+}
+.search_bar input {
+  background-color: #ffffff;
+  align-self: center;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+tr,
+td {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+#layout {
+  padding: 50px;
+}
+
+#insideBox {
+  padding-bottom: 50px;
+  padding-right: 200px;
+}
+
+#smallpad {
+  padding-top: 2px;
+}
+
+.btn {
+  margin: auto;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  position: relative;
+  left: 245px;
+  border: 1px solid black;
+}
+
+.btn:hover {
+  background-color: darkgray;
+}
