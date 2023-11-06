@@ -1,6 +1,8 @@
 html {
   background-color: #ffffff;
 }
+
+}
 .frame {
   display: flex;
   background-color: #d9d9d9;
@@ -103,13 +105,15 @@ td {
 
 #insideBox {
   padding-bottom: 10px;
-  padding-right: 200px;
+  width: 300px;
 }
-
+.button_div{
+  display: flex;
+  justify-content: flex-end;
+}
 .btn {
   padding-right: 15px;
   padding-bottom: 5px;
-  display: flex;
   border: 1px solid black;
 }
 
