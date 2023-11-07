@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+</head>
+  <meta charset="UTF-8">
+  <meta name="viewport">
+  <link rel="stylesheet" href="style.css" />
+  <title>Your Store List</title>
+</head>
+
+<body>
+
+  <div class="frame">
+    <div class="left_menu">
+      <input type="button" onclick="redirectHomePage()" class="homeBtn">
+      <input type="button" onclick="redirectStoreListPage()" class="storeListBtn">
+    </div>
+    <div class="search_field">
+      <div class="search_bar">
+        <div class="search_icon_div">
+          <img alt="Search icon" class="search_icon" src="search-icon.png" />
+        </div>
+        <input type="text">
+        <div class="clear_icon_div">
+          <img alt="Clear button" class="clear_icon" src="clear-button-1.png" />
+        </div>
+      </div>
+    </div>
+    <div class="location_profile">
+      <img class="location-pointer" alt="Location pointer" src="location-pointer.png" />
+      <p>520 Monroe ln, Chicago, Illinois</p>
+      <img class="profile" alt="Profile" src="profile.png" /> <!-- might not need this -->
+    </div>
+  </div>
+
+  <div>
+    <input type="button" onclick="compareStores()" value="Compare" class="compareBtn">
+    <input type="button" onclick="clearSelectedStores()" value="Clear" class="clearStoresBtn" disabled>
+  </div>
+
+  <div>
+    <table id="layout">
+      <tr>
+        <td id="insideBox">
+          <div>
+            <div class="button_div">
+            <input type="button" class="btn" value="+Add">
+            </div>
+            <div>
+              Click the "Add" button to select Store 1
+            </div>
+          </div>
+        </td>
+        <td id="insideBox">
+          <div id="smallpad">
+            <div class="button_div">
+            <input type="button" class="btn" value="+Add">
+            </div>
+            <div>
+              Click the "Add" button to select Store 2
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <table id="layout">
+      <tbody id="storeTableBody">
+        <!-- Will be populated wiuth JS below -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Retrieve the storeList from the query parameter
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var storeListJSON = urlParams.get('storeList');
+
+    // Parse the JSON string back to an array
+    var receivedStoreList = JSON.parse(decodeURIComponent(storeListJSON));
+
+    var tableBody = document.getElementById("storeTableBody");
+    for (var i = 0; i < receivedStoreList.length; i++) {
+      if (i % 3 === 0) {
+        var row = tableBody.insertRow();
+      }
+      var store = receivedStoreList[i];
+      var cell = row.insertCell();
+      cell.classList.add("smallpad");
+
+      var buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("button_div");
+      var button = document.createElement("button");
+      button.textContent = "Remove";
+      buttonContainer.appendChild(button);
+
+      // Create a div for each attribute
+      var nameDiv = document.createElement("div");
+      nameDiv.textContent = "Name: " + store.name;
+      nameDiv.classList.add("store-info");
+
+      var typeDiv = document.createElement("div");
+      typeDiv.textContent = "Type: " + store.type;
+      typeDiv.classList.add("store-info");
+
+      var distanceDiv = document.createElement("div");
+      distanceDiv.textContent = "Distance: " + store.distance + "mi.";
+      distanceDiv.classList.add("store-info");
+
+      var priceDiv = document.createElement("div");
+      priceDiv.textContent = "Price: " + store.price;
+      priceDiv.classList.add("store-info");
+
+      var ratingDiv = document.createElement("div");
+      ratingDiv.textContent = "Rating: " + store.rating;
+      ratingDiv.classList.add("store-info");
+
+      // Append the divs to the cell
+      cell.appendChild(buttonContainer);
+      cell.appendChild(nameDiv);
+      cell.appendChild(typeDiv);
+      cell.appendChild(distanceDiv);
+      cell.appendChild(priceDiv);
+      cell.appendChild(ratingDiv);
+    }
+
+    function redirectHomePage() { // go to index.html
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+
+</html>
