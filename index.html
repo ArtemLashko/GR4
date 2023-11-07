@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 </head>
-<link rel= "stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -32,14 +32,14 @@
     <table id="layout">
       <tbody id="storeContainer"></tbody>
     </table>
-</div>
+  </div>
 
   <script>
 
     // Get a reference to the store container
 
 
-    function Store(name, type, distance, price, rating,deal) { // Constructor function for a store
+    function Store(name, type, distance, price, rating, deal) { // Constructor function for a store
       this.name = name;
       this.type = type;
       this.distance = distance;
@@ -47,20 +47,20 @@
       this.rating = rating;
       this.deal = deal;
     }
-    
+
 
     // Create instances of stores
-    var store1 = new Store("Store1", "Franchise", 5, "$$", 4.1,"bread");
-    var store2 = new Store("Store2", "Franchise", 2, "$", 4.0,"egg");
-    var store3 = new Store("Store3", "Franchise", 4, "$$", 3.2,"noodles");
-    var store4 = new Store("Store4", "Local", 5, "$$$", 4.4,"milk");
-    var store5 = new Store("Store5", "Franchise", 6, "$", 4.8,"cookies");
-    var store6 = new Store("Store6", "Franchise", 7, "$$", 2.0,"chips");
-    var store7 = new Store("Store7", "Local", 10, "$$", 3.3,"candy");
-    var store8 = new Store("Store8", "Franchise", 8, "$$$", 2.1,"cheese");
-    var store9 = new Store("Store9", "Local", 3, "$", 3.9,"tomato");
+    var store1 = new Store("Store1", "Franchise", 5, "$$", 4.1, "bread");
+    var store2 = new Store("Store2", "Franchise", 2, "$", 4.0, "egg");
+    var store3 = new Store("Store3", "Franchise", 4, "$$", 3.2, "noodles");
+    var store4 = new Store("Store4", "Local", 5, "$$$", 4.4, "milk");
+    var store5 = new Store("Store5", "Franchise", 6, "$", 4.8, "cookies");
+    var store6 = new Store("Store6", "Franchise", 7, "$$", 2.0, "chips");
+    var store7 = new Store("Store7", "Local", 10, "$$", 3.3, "candy");
+    var store8 = new Store("Store8", "Franchise", 8, "$$$", 2.1, "cheese");
+    var store9 = new Store("Store9", "Local", 3, "$", 3.9, "tomato");
     var storeList = [store1, store2, store3, store4, store5, store6, store7, store8, store9]; // Create a list of stores using an array
-    
+
     const storeContainer = document.getElementById('storeContainer');
     let currentRow; // Initialize a variable to keep track of the current row
     storeList.forEach((store, index) => {
@@ -91,6 +91,9 @@
           </div>
           <div>
             Rating: ${store.rating}
+          </div>
+          <div>
+            Deal: ${store.deal}
           </div>
         </div>
       `;
