@@ -2,7 +2,6 @@ html {
   background-color: #ffffff;
 }
 
-}
 .frame {
   display: flex;
   background-color: #d9d9d9;
@@ -125,4 +124,29 @@ td {
   border-spacing: 50px;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+
+
+
+
+
+
+.storeListBtn {
+  background-image: url("transaction-list.png");
+  background-size: cover;
+  height: 32px;
+  width: 32px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 1px gray;
+}
+
+.homeBtn {
+  background-image: url("home.png");
+  background-size: cover;
+  height: 32px;
+  width: 32px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1px 1px gray;
 }
