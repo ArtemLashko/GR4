@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 </head>
-<link rel="stylesheet" href="style.css" />
+<link rel= "stylesheet" href="style.css" />
 </head>
 
 <body>
 
   <div class="frame">
     <div class="left_menu">
-      <img class="home" alt="Home" src="home.png" />
-      <img class="transaction-list" alt="Transaction list" src="transaction-list.png" />
+      <input type="button" onclick="redirectHomePage()" class="homeBtn">
+      <input type="button" onclick="redirectStoreListPage()" class="storeListBtn">
     </div>
     <div class="search_field">
       <div class="search_bar">
@@ -27,223 +27,145 @@
       <img class="profile" alt="Profile" src="profile.png" /> <!-- might not need this -->
     </div>
   </div>
+
   <div>
     <table id="layout">
-      <tr>
-        <td id="insideBox">
-          <div>
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="+Add">
-            </div>
-            </input>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-      </tr>
+      <tbody id="storeContainer"></tbody>
     </table>
-  </div>
+</div>
+
+  <script>
+    //creates an array of stores. just filler content for now 
+    const stores = [
+    {
+      name: 'Store 1',
+      type: 'Franchise',
+      distance: '5 mi',
+      price: '$$',
+      rating: 4.1,
+    },
+    {
+      name: 'Store 2',
+      type: 'Local',
+      distance: '3 mi',
+      price: '$',
+      rating: 4.5,
+    },
+    {
+      name: 'Store 3',
+      type: 'Franchise',
+      distance: '2 mi',
+      price: '$$',
+      rating: 4.2,
+    },
+    {
+      name: 'Store 4',
+      type: 'Franchise',
+      distance: '7 mi',
+      price: '$$$',
+      rating: 3,
+    },
+    {
+      name: 'Store 5',
+      type: 'Franchise',
+      distance: '4 mi',
+      price: '$',
+      rating: 3.8,
+    },
+    {
+      name: 'Store 6',
+      type: 'Franchise',
+      distance: '6 mi',
+      price: '$$',
+      rating: 3.9,
+    },
+    {
+      name: 'Store 7',
+      type: 'Local',
+      distance: '3 mi',
+      price: '$',
+      rating: 2,
+    },
+    {
+      name: 'Store 8',
+      type: 'Franchise',
+      distance: '9 mi',
+      price: '$',
+      rating: 4,
+    },
+    {
+      name: 'Store 9',
+      type: 'Franchise',
+      distance: '5 mi',
+      price: '$$$',
+      rating: 4.2,
+    },
+];
+
+    // Get a reference to the store container
+    const storeContainer = document.getElementById('storeContainer');
+    let currentRow; // Initialize a variable to keep track of the current row
+    stores.forEach((store, index) => {
+      if (index % 3 === 0) {
+        // Start a new row for every third store
+        currentRow = document.createElement('tr');
+        storeContainer.appendChild(currentRow);
+      }
+
+      const storeInstance = document.createElement('td');
+      storeInstance.id = 'insideBox';
+      storeInstance.innerHTML = `
+        <div>
+          <div class="button_div">
+            <input type="button" class="btn" value="+Add">
+          </div>
+          <div>
+            Name: ${store.name}
+          </div>
+          <div>
+            Type: ${store.type}
+          </div>
+          <div>
+            Distance: ${store.distance}
+          </div>
+          <div>
+            Price: ${store.price}
+          </div>
+          <div>
+            Rating: ${store.rating}
+          </div>
+        </div>
+      `;
+
+      currentRow.appendChild(storeInstance);
+    });
+
+
+    function Store(name, type, distance, price, rating) { // Constructor function for a store
+      this.name = name;
+      this.type = type;
+      this.distance = distance;
+      this.price = price;
+      this.rating = rating;
+    }
+    
+
+    // Create instances of stores
+    var store1 = new Store("Store1", "Franchise", 5, "$$", 4.1);
+    var store2 = new Store("Store2", "Franchise", 5, "$$", 4.1);
+    var store3 = new Store("Store3", "Franchise", 5, "$$", 4.1);
+    var storeList = [store1, store2, store3]; // Create a list of stores using an array
+
+    function redirectStoreListPage() {
+      console.log(storeList);
+      var storeListJSON = JSON.stringify(storeList); // Convert the storeList array to a JSON string
+      console.log(storeListJSON);
+      var link = document.createElement("a"); // Create a link with query parameter to another page
+      link.href = "StoreList.html?storeList=" + encodeURIComponent(storeListJSON); // pass the list of stores to StoreList.html
+      link.click();
+    }
+  </script>
+
 </body>
 
 </html>
