@@ -66,86 +66,69 @@
 
   <div>
     <table id="layout">
-      <tr>
-        <td id="insideBox">
-          <div>
-            <div class="button_div">
-            <input type="button" class="btn" value="Remove">
-            </div>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="Remove">
-            </div>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-        <td id="insideBox">
-          <div id="smallpad">
-            <div class="button_div">
-            <input type="button" class="btn" value="Remove">
-            </div>
-            <div>
-              Name: Store1
-            </div>
-            <div>
-              Type: Franchise
-            </div>
-            <div>
-              Distance: 5mi
-            </div>
-            <div>
-              Price: $$
-            </div>
-            <div>
-              Rating: 4.1
-            </div>
-          </div>
-        </td>
-      </tr>
+      <tbody id="storeTableBody">
+        <!-- Will be populated wiuth JS below -->
+      </tbody>
     </table>
   </div>
 
   <script>
-    function redirectStoreListPage() {
-      window.location.href = "StoreList.html";
+    // Retrieve the storeList from the query parameter
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var storeListJSON = urlParams.get('storeList');
+
+    // Parse the JSON string back to an array
+    var receivedStoreList = JSON.parse(decodeURIComponent(storeListJSON));
+
+    var tableBody = document.getElementById("storeTableBody");
+    for (var i = 0; i < receivedStoreList.length; i++) {
+      if (i % 3 === 0) {
+        var row = tableBody.insertRow();
+      }
+      var store = receivedStoreList[i];
+      var cell = row.insertCell();
+      cell.classList.add("smallpad");
+
+      var buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("button_div");
+      var button = document.createElement("button");
+      button.textContent = "Remove";
+      buttonContainer.appendChild(button);
+
+      // Create a div for each attribute
+      var nameDiv = document.createElement("div");
+      nameDiv.textContent = "Name: " + store.name;
+      nameDiv.classList.add("store-info");
+
+      var typeDiv = document.createElement("div");
+      typeDiv.textContent = "Type: " + store.type;
+      typeDiv.classList.add("store-info");
+
+      var distanceDiv = document.createElement("div");
+      distanceDiv.textContent = "Distance: " + store.distance + "mi.";
+      distanceDiv.classList.add("store-info");
+
+      var priceDiv = document.createElement("div");
+      priceDiv.textContent = "Price: " + store.price;
+      priceDiv.classList.add("store-info");
+
+      var ratingDiv = document.createElement("div");
+      ratingDiv.textContent = "Rating: " + store.rating;
+      ratingDiv.classList.add("store-info");
+
+      // Append the divs to the cell
+      cell.appendChild(buttonContainer);
+      cell.appendChild(nameDiv);
+      cell.appendChild(typeDiv);
+      cell.appendChild(distanceDiv);
+      cell.appendChild(priceDiv);
+      cell.appendChild(ratingDiv);
     }
 
-    function redirectHomePage() {
+    function redirectHomePage() { // go to index.html
       window.location.href = "index.html";
     }
-
   </script>
 </body>
 

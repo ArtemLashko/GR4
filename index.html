@@ -247,10 +247,28 @@
   </div>
 
   <script>
-    function redirectStoreListPage() {
-      window.location.href = "StoreList.html";
+    function Store(name, type, distance, price, rating) { // Constructor function for a store
+      this.name = name;
+      this.type = type;
+      this.distance = distance;
+      this.price = price;
+      this.rating = rating;
     }
 
+    // Create instances of stores
+    var store1 = new Store("Store1", "Franchise", 5, "$$", 4.1);
+    var store2 = new Store("Store2", "Franchise", 5, "$$", 4.1);
+    var store3 = new Store("Store3", "Franchise", 5, "$$", 4.1);
+    var storeList = [store1, store2, store3]; // Create a list of stores using an array
+
+    function redirectStoreListPage() {
+      console.log(storeList);
+      var storeListJSON = JSON.stringify(storeList); // Convert the storeList array to a JSON string
+      console.log(storeListJSON);
+      var link = document.createElement("a"); // Create a link with query parameter to another page
+      link.href = "StoreList.html?storeList=" + encodeURIComponent(storeListJSON); // pass the list of stores to StoreList.html
+      link.click();
+    }
   </script>
 
 </body>
