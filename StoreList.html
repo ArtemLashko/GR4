@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport">
 <link rel="stylesheet" href="style.css" />
+    <script src=
+"https://code.jquery.com/jquery-3.5.1.min.js"
+integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+         crossorigin= "anonymous"></script>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <title>Your Store List</title>
 </head>
 
@@ -12,7 +18,10 @@
     <div class="frame">
         <div class="left_menu">
             <input type="button" onclick="redirectHomePage()" class="homeBtn">
-            <input type="button" onclick="redirectStoreListPage()" class="storeListBtn">
+            <div class="transaction-list">
+                <input type="button" onclick="redirectStoreListPage()" class="storeListBtn">
+                <span class="highlight-number">1</span>
+            </div>
         </div>
         <div class="search_field">
             <div class="search_bar">
@@ -49,12 +58,70 @@
 
     <script>
         // Retrieve the storeList from the query parameter
+            var store1 = new Store("Store1", "Franchise", 5, "$$", 4.1, "bread");
+    var store2 = new Store("Store2", "Franchise", 2, "$", 4.0, "egg");
+    var store3 = new Store("Store3", "Franchise", 4, "$$", 3.2, "noodles");
+    var store4 = new Store("Store4", "Local", 5, "$$$", 4.4, "milk");
+    var store5 = new Store("Store5", "Franchise", 6, "$", 4.8, "cookies");
+    var store6 = new Store("Store6", "Franchise", 7, "$$", 2.0, "chips");
+    var store7 = new Store("Store7", "Local", 10, "$$", 3.3, "candy");
+    var store8 = new Store("Store8", "Franchise", 8, "$$$", 2.1, "cheese");
+    var store9 = new Store("Store9", "Local", 3, "$", 3.9, "tomato");
+    var storeList = [store1, store2, store3, store4, store5, store6, store7, store8, store9]; // Create a list of stores using an array
+  var added_items = [];
+  function addCookies(id) {
+    id = id.toString();
+    console.log("trying to add cookies", id);
+
+    var prev_cookie = $.cookie("id");
+    if(prev_cookie === undefined){
+      prev_cookie = "";
+    }
+    if($.cookie("id") !== undefined) {
+        var new_cookie = prev_cookie + ";" + id ;
+    }
+    else{
+        var new_cookie = id;
+    }
+    $.cookie("id", new_cookie);
+    update_cookies();
+}
+  function getCookies(){
+    var decodedCookie = decodeURIComponent($.cookie("id"));
+    var cookies = decodedCookie.split(';');
+    var prev_cookie = $.cookie("id");
+    if(prev_cookie === undefined){
+        return [];
+    }
+    console.log(cookies, cookies.length);
+    if(cookies.length === 0) {
+        console.log("undefined cookies array");
+        return [];
+    }
+    return cookies;
+  }
+  function getStores(){
+      let list = getCookies();
+      let store_list = [];
+      for(let i = 0; i < list.length; i++){
+          store_list.push(storeList[list[i]])
+      }
+      return store_list;
+  }
+  function Store(name, type, distance, price, rating, deal) { // Constructor function for a store
+      this.name = name;
+      this.type = type;
+      this.distance = distance;
+      this.price = price;
+      this.rating = rating;
+      this.deal = deal;
+    }
         var queryString = window.location.search;
         var urlParams = new URLSearchParams(queryString);
         var storeListJSON = urlParams.get('storeList');
 
         // Parse the JSON string back to an array
-        var receivedStoreList = JSON.parse(decodeURIComponent(storeListJSON));
+        var receivedStoreList = getStores();
 
         var selectedStores = [];
 
@@ -198,6 +265,18 @@
 
         function redirectHomePage() { // go to index.html
             window.location.href = "index.html";
+        }
+        $(document).ready(function() {
+            populateStoreList();
+            added_items = getCookies();
+            console.log(added_items);
+            if (added_items.length == 0) {
+                console.log("No cookies");
+                $(".highlight-number").css("visibility", "hidden");
+            } else {
+                $(".highlight-number").css("visibility", "visible");
+                $(".highlight-number").text(added_items.length);
+            }
         }
     </script>
 </body>
