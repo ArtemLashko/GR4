@@ -143,3 +143,19 @@ td {
   border-radius: 8px;
   box-shadow: 1px 1px 1px 1px gray;
 }
+.transaction-list {
+  position: relative;
+  /* Other styles for transaction-list */
+}
+
+.highlight-number {
+  position: absolute;
+  right: -4px;
+  bottom: -7px;
+  color: red;
+  /* background-color: rgba(128, 128, 128, 0.5); */
+  /*box-shadow: 1px 1px 1px 1px gray;*/
+  border-radius: 8px;
+  /* border: 2px solid black; Add this line */
+  /* Add padding, margin, etc. as needed */
+}
