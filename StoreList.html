@@ -241,8 +241,8 @@
             ratingDiv.classList.add("store-info");
 
             var DealDiv = document.createElement("div");
-            ratingDiv.textContent = "Deal: " + store.deal;
-            ratingDiv.classList.add("store-info");
+            DealDiv.textContent = "Deal: " + store.deal;
+            DealDiv.classList.add("store-info");
 
             // Append the divs to the cell
             cell.appendChild(buttonContainer);
@@ -251,6 +251,7 @@
             cell.appendChild(distanceDiv);
             cell.appendChild(priceDiv);
             cell.appendChild(ratingDiv);
+            cell.appendChild(DealDiv);
 
             var checkbox = document.createElement("input");
             checkbox.type = "checkbox";
