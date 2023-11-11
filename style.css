@@ -157,10 +157,19 @@ td {
   /* border: 2px solid black; Add this line */
   /* Add padding, margin, etc. as needed */
 }
+
 #storeTableBody td {
   width: 300px;
   padding-bottom: 10px;
   border-spacing: 50px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.compareBtn {
+  padding: 25px;
+}
+
+.clearStoresBtn {
+  padding: 25px;
 }
