@@ -27,7 +27,7 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         <div class="search_icon_div">
           <img alt="Search icon" class="search_icon" src="search-icon.png" />
         </div>
-        <input type="text">
+        <input id="search_text_field" type="text">
         <div class="clear_icon_div">
           <img alt="Clear button" class="clear_icon" src="clear-button-1.png" />
         </div>
@@ -124,12 +124,12 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       this.deal = deal;
     }
     
-  function populateStoreList() {
-    
+  function populateStoreList(array = storeList) {
+    $("#storeContainer").empty();
     const storeContainer = document.getElementById('storeContainer');
     console.log(storeContainer);
     let currentRow; // Initialize a variable to keep track of the current row
-    storeList.forEach((store, index) => {
+    array.forEach((store, index) => {
       if (index % 3 === 0) {
         // Start a new row for every third store
         currentRow = document.createElement('tr');
@@ -175,6 +175,41 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       link.href = "StoreList.html?storeList=" + encodeURIComponent(storeListJSON); // pass the list of stores to StoreList.html
       link.click();
     }
+  function compare(first, second){
+    let size_first = first.length;
+    let size_second = second.length;
+    let j = 0;
+    for(let i = 0; i < size_first; ++i){
+      if(first[i] == second[j]){
+        j++;
+      }
+      else{
+        j = 0;
+      }
+      if(j == size_second){
+        return true;
+      }
+    }
+    return false;
+  }
+  $(".search_icon").on("click", function(){
+    let search_box_val = document.getElementById("search_text_field").value;
+    let x = [];
+    for(let i = 0; i < storeList.length; ++i){
+      if(compare(storeList[i].name,search_box_val)){
+        x.push(storeList[i]);
+      }
+    }
+    console.log(x);
+    populateStoreList(x);
+
+  });
+  $(".clear_icon").on("click", function(){
+    let search_box_val = document.getElementById("search_text_field");
+    search_box_val.value = "";
+    populateStoreList();
+  });
+  
   $(document).ready(function()
     {
       populateStoreList();
