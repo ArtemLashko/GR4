@@ -7,24 +7,32 @@
 
   <div class="frame">
     <div class="left_menu">
+<<<<<<< Updated upstream
       <input type="button" onclick="redirectHomePage()" class="homeBtn">
       <input type="button" onclick="redirectStoreListPage()" class="storeListBtn">
+=======
+      <input type="button" title="Home!" onclick="redirectHomePage()" class="homeBtn">
+      <div class="transaction-list">
+          <input type="button" title="Store List" onclick="redirectStoreListPage()" class="storeListBtn">
+          <span class="highlight-number">1</span>
+      </div>
+>>>>>>> Stashed changes
     </div>
     <div class="search_field">
       <div class="search_bar">
         <div class="search_icon_div">
-          <img alt="Search icon" class="search_icon" src="search-icon.png" />
+          <img alt="Search icon" title="Search" class="search_icon" src="search-icon.png" />
         </div>
         <input type="text">
         <div class="clear_icon_div">
-          <img alt="Clear button" class="clear_icon" src="clear-button-1.png" />
+          <img alt="Clear button" title="Clear" class="clear_icon" src="clear-button-1.png" />
         </div>
       </div>
     </div>
     <div class="location_profile">
-      <img class="location-pointer" alt="Location pointer" src="location-pointer.png" />
-      <p>520 Monroe ln, Chicago, Illinois</p>
-      <img class="profile" alt="Profile" src="profile.png" /> <!-- might not need this -->
+      <img class="location-pointer" alt="Location pointer" title="Current Location" src="location-pointer.png" />
+      <p title="Current Location">520 Monroe ln, Chicago, Illinois</p>
+      <img class="profile" alt="Profile" title="Profile" src="profile.png" />
     </div>
   </div>
 
