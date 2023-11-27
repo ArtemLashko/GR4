@@ -233,8 +233,8 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
           let html_button = document.querySelector(`[data-id="${store_id}"]`);
           let tableCell = html_button.closest('td'); // the cell containing the button
           let action = html_button.getAttribute("data-action");
-          html_button.value = "-Delete";
-          html_button.setAttribute('data-action', 'Delete');
+          html_button.value = "-Remove";
+          html_button.setAttribute('data-action', 'Remove');
           tableCell.style.borderColor = 'green'; // Set the store border to green to signify the store was added
       }
     });
@@ -257,8 +257,8 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       let action = elem.getAttribute("data-action");
       if(action == "Add") {
           addCookies(id);
-          elem.value = "-Delete";
-          elem.setAttribute('data-action', 'Delete');
+          elem.value = "-Remove";
+          elem.setAttribute('data-action', 'Remove');
           tableCell.style.borderColor = 'green'; // Set the store border to green to signify the store was added
       }
       else{
