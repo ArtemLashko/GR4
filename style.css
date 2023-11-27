@@ -1,10 +1,10 @@
 html {
-  background-color: #ffffff;
+  background-color: #969696;
 }
 
 .frame {
   display: flex;
-  background-color: #d9d9d9;
+  background-color: #787878;
   height: 56px;
   position: relative;
   width: 100%;
@@ -41,7 +41,7 @@ html {
   height: 32px;
   width: 32px;
   border-radius: 8px;
-  box-shadow: 1px 1px 1px 1px gray;
+  box-shadow: 1px 1px 1px 1px black;
 }
 .left_menu img:hover {
   box-shadow: 0 0 0px 1px black;
@@ -94,19 +94,16 @@ html {
 
 tr,
 td {
+  background-color: #d2d2d2;
   border-collapse: collapse;
   border: 1px solid black;
-}
-
-#layout {
-  padding: 50px;
 }
 
 #insideBox {
   padding-bottom: 10px;
   width: 300px;
 }
-.button_div{
+.button_div {
   display: flex;
   justify-content: flex-end;
 }
@@ -121,17 +118,11 @@ td {
 }
 
 #layout {
+  padding: 50px;
   border-spacing: 50px;
   margin-left: auto;
   margin-right: auto;
 }
-
-
-
-
-
-
-
 
 .storeListBtn {
   background-image: url("transaction-list.png");
@@ -149,4 +140,36 @@ td {
   width: 32px;
   border-radius: 8px;
   box-shadow: 1px 1px 1px 1px gray;
+}
+.transaction-list {
+  position: relative;
+  /* Other styles for transaction-list */
+}
+
+.highlight-number {
+  position: absolute;
+  right: -4px;
+  bottom: -7px;
+  color: red;
+  /* background-color: rgba(128, 128, 128, 0.5); */
+  /*box-shadow: 1px 1px 1px 1px gray;*/
+  border-radius: 8px;
+  /* border: 2px solid black; Add this line */
+  /* Add padding, margin, etc. as needed */
+}
+
+#storeTableBody td {
+  width: 300px;
+  padding-bottom: 10px;
+  border-spacing: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.compareBtn {
+  padding: 25px;
+}
+
+.clearStoresBtn {
+  padding: 25px;
 }
