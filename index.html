@@ -1,278 +1,325 @@
 <!DOCTYPE html>
-<!-- Design Ideas: For any logo saturation - 20%  The lighter the color => the higher the element on the website-->
+<html lang="en">
 </head>
-
+<meta charset="UTF-8">
+<meta name="viewport">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600&family=Roboto:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLvMkhCK_F3O0YTLxillLMsWkcgegrES4"></script>
-<script src=
-"https://code.jquery.com/jquery-3.5.1.min.js"
-integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-         crossorigin= "anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-<script src=
-  "https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js">
-</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<title>Your Store List</title>
 </head>
 
 <body>
 
-  <div class="frame">
-    <div class="left_menu">
-      <div class="logo">
-        <img alt="Location pointer" title="Current Location" src="logo.png" />
-      </div>
-      <div class="ButtonContainer">
-      <input type="button" title="Home!" onclick="redirectHomePage()" class="homeBtn">
-      <p class="subtle-text">Home</p>
-      </div>
-      <div class="ButtonContainer transaction-list">
-          <input type="button" title="Store List" onclick="redirectStoreListPage()" class="storeListBtn">
-          <p class="subtle-text">Shopping List</p>
-          <span class="highlight-number">1</span>
-      </div>
-    </div>
-    <div class="search_field">
-      <div class="search_bar">
-        <div class="search_icon_div">
-          <img alt="Search icon" title="Search" class="search_icon" src="search-icon.png" />
-        </div>
-        <input id="search_text_field" type="text" placeholder="Search for an Item!">
-        <div class="clear_icon_div">
-          <img alt="Clear button" title="Clear" class="clear_icon" src="clear-button-1.png" />
-        </div>
-      </div>
-    </div>
-    <div class="location_profile">
-      <img class="location-pointer" alt="Location pointer" title="Current Location" src="location-pointer.png" />
-      <p class="text-md" id="CurLocation" title="Current Location">520 Monroe ln, Chicago, Illinois</p>
-      <!-- <img class="profile" alt="Profile" title="Profile" src="profile.png" /> -->
-    </div>
-  </div>
-  <hr>
-    <div id="MainPage">
-      <div id="ItemsContent">
-        <div id="Sort">
-          <p class="text-lg" id="clearall">Clear All</p>
-          <p class="text-md">Sort</p>
-          <div>
-            <input type="radio" id="savings" name="fav_language" value="HTML">
-            <label for="savings">Savings</label><br>
-            <input type="radio" id="distance" name="fav_language" value="Distance">
-            <label for="html">Distance</label><br>
-            <input type="radio" id="rating" name="fav_language" value="HTML">
-            <label for="rating">Rating</label><br>
+    <div class="frame">
+        <div class="left_menu">
+          <div class="logo">
+            <img alt="Location pointer" title="Current Location" src="logo.png" />
           </div>
-          <p class="text-md">Price</p>
-          <div id="buttonarray">
-            <div class="button_div">
-              <input type="button" class="btn" value="$" data-action="Add" id="dollar1">
-            </div>
-            <div class="button_div">
-              <input type="button" class="btn" value="$$" data-action="Add" id="dollar2">
-            </div>
-            <div class="button_div">
-              <input type="button" class="btn" value="$$$" data-action="Add" id="dollar3">
-            </div>
-            
+          <div class="ButtonContainer">
+          <input type="button" title="Home!" onclick="redirectHomePage()" class="homeBtn">
+          <p class="subtle-text">Home</p>
+          </div>
+          <div class="ButtonContainer transaction-list">
+              <input type="button" title="Store List" onclick="redirectStoreListPage()" class="storeListBtn">
+              <p class="subtle-text">Shopping List</p>
+              <span class="highlight-number">1</span>
           </div>
         </div>
-        <div id="storeContainer"></div>
+        <div class="search_field">
+          <div class="search_bar">
+            <div class="search_icon_div">
+              <img alt="Search icon" title="Search" class="search_icon" src="search-icon.png" />
+            </div>
+            <input id="search_text_field" type="text" placeholder="Search for an Item!">
+            <div class="clear_icon_div">
+              <img alt="Clear button" title="Clear" class="clear_icon" src="clear-button-1.png" />
+            </div>
+          </div>
+        </div>
+        <div class="location_profile">
+          <img class="location-pointer" alt="Location pointer" title="Current Location" src="location-pointer.png" />
+          <p class="text-md" id="CurLocation" title="Current Location">520 Monroe ln, Chicago, Illinois</p>
+          <!-- <img class="profile" alt="Profile" title="Profile" src="profile.png" /> -->
+        </div>
       </div>
+      <hr>
+    <div>
+        <input type="button" onclick="compareStores()" value="Compare" class="compareBtn">
+        <input type="button" onclick="clearSelectedStores()" value="Clear" class="clearStoresBtn" disabled>
     </div>
-<script>
-        // Create instances of stores
-    var store1 = new Store("Target", "Franchise", 5, "$$", 4.1, "Bread", 2.99, 1.99);
+
+    <div id="comparisonResults"></div>
+
+    <div>
+        <table id="layout">
+            <tbody id="storeTableBody">
+                <!-- Will be populated wiuth JS below -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Retrieve the storeList from the query parameter
+        var store1 = new Store("Target", "Franchise", 5, "$$", 4.1, "Bread", 2.99, 1.99);
     var store2 = new Store("Walmart", "Franchise", 2, "$", 4.0, "Eggs", 5.4, 4.3);
     var store3 = new Store("Target", "Franchise", 4, "$$", 3.2, "Noodles", 4.29, 3.99);
     var store4 = new Store("Dollar_Tree", "Local", 5, "$$$", 4.4, "Milk", 3.99, 2.85);
-    var store5 = new Store("Target", "Franchise", 6, "$", 4.8, "Cookies", 5.69, 3.5);
+    var store5 = new Store("Target", "Franchise", 6, "$", 4.8, "Eggs", 5.69, 3.5);
     var store6 = new Store("7_Eleven", "Franchise", 7, "$$", 2.0, "Chips", 3.00, 2.19);
     var store7 = new Store("Walmart", "Local", 10, "$$", 3.3, "Candy", 3.45, 1.99);
     var store8 = new Store("Walmart", "Franchise", 8, "$$$", 2.1, "Cheese", 13.63, 9.99);
     var store9 = new Store("7_Eleven", "Local", 3, "$", 3.9, "Tomato", 3.4, 2.99);
-    var storeList = [store1, store2, store3, store4, store5, store6, store7, store8, store9]; // Create a list of stores using an array
-  var added_items = [];
-  function addCookies(id) {
-    id = id.toString();
-    console.log("trying to add cookies", id);
+        var storeList = [store1, store2, store3, store4, store5, store6, store7, store8, store9]; // Create a list of stores using an array
+        var added_items = [];
+        function addCookies(id) {
+            id = id.toString();
+            console.log("trying to add cookies", id);
 
-    var prev_cookie = $.cookie("id");
-    if(prev_cookie === undefined){
-      prev_cookie = "";
-    }
-    console.log("here");
-    if($.cookie("id") !== undefined) {
-        var new_cookie = prev_cookie + ";" + id ;
-    }
-    else{
-        var new_cookie = id;
-    }
-    console.log(new_cookie, $.cookie("id"));
-    $.cookie("id", new_cookie);
-    console.log(new_cookie, $.cookie("id"));
-    update_cookies();
-}
-  function getCookies(){
-    var decodedCookie = decodeURIComponent($.cookie("id"));
-    var cookies = decodedCookie.split(';');
-    var prev_cookie = $.cookie("id");
-    if(prev_cookie === undefined){
-        return [];
-    }
-    console.log(cookies, cookies.length);
-    if(cookies.length === 0) {
-        console.log("undefined cookies array");
-        return [];
-    }
-    return cookies;
-  }
-    function deleteCookie(id) {
-        id = id.toString();
-        var prev_cookie = $.cookie("id");
-
-        if (prev_cookie === undefined) {
-            return;
-        }
-
-        var cookies = getCookies();
-        var index = cookies.indexOf(id);
-
-        if (index !== -1) {
-            cookies.splice(index, 1);
-            if(cookies.length === 0){
-                $.removeCookie("id");
+            var prev_cookie = $.cookie("id");
+            if (prev_cookie === undefined) {
+                prev_cookie = "";
+            }
+            if ($.cookie("id") !== undefined) {
+                var new_cookie = prev_cookie + ";" + id;
             }
             else {
-                $.cookie("id", cookies.join(';'));
+                var new_cookie = id;
             }
-            update_cookies(); // Call your update_cookies function if needed
+            $.cookie("id", new_cookie);
+            update_cookies();
         }
-    }
-  function Store(name, type, distance, price, rating, deal, oldPrice, newPrice) { // Constructor function for a store
-      this.name = name;
-      this.type = type;
-      this.distance = distance;
-      this.price = price;
-      this.rating = rating;
-      this.deal = deal;
-      this.oldPrice = oldPrice;
-      this.newPrice = newPrice;
-    }
-    
-  function populateStoreList(array = storeList) {
-    $("#storeContainer").empty();
-    const storeContainer = document.getElementById('storeContainer');
-    console.log(storeContainer);
-    // let currentRow; // Initialize a variable to keep track of the current row
-    array.forEach((store, index) => {
-      // if (index % 4 === 0) {
-      //   // Start a new row for every third store
-      //   storeContainer.appendChild(currentRow);
-      // }
+        function getCookies() {
+            var decodedCookie = decodeURIComponent($.cookie("id"));
+            var cookies = decodedCookie.split(';');
+            var prev_cookie = $.cookie("id");
+            if (prev_cookie === undefined) {
+                return [];
+            }
+            console.log(cookies, cookies.length);
+            if (cookies.length === 0) {
+                console.log("undefined cookies array");
+                return [];
+            }
+            return cookies;
+        }
+        function getStores() {
+            let list = getCookies();
+            let store_list = [];
+            for (let i = 0; i < list.length; i++) {
+                store_list.push(storeList[list[i]])
+            }
+            return store_list;
+        }
+        function Store(name, type, distance, price, rating, deal, oldPrice, newPrice) { // Constructor function for a store
+            this.name = name;
+            this.type = type;
+            this.distance = distance;
+            this.price = price;
+            this.rating = rating;
+            this.deal = deal;
+            this.oldPrice = oldPrice;
+            this.newPrice = newPrice;
+        }
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var storeListJSON = urlParams.get('storeList');
 
-      const storeInstance = document.createElement('div');
-      storeInstance.className = 'store_card';
-      // storeInstance.id = 'insideBox';
-      storeInstance.innerHTML = `
-          <div class = "store_card_image_${store.name}">
-            <div class="store_info_image">
-            <p class="text-md">${store.name}</p>
-            <p class="text-md">${store.distance} miles</p>
-            </div>
-          </div>
-          <hr>
-          <div class="button_div">
-            <input type="button" class="btn" value="Add" data-action="Add" data-id = "${index}" onclick = "button_action(${index})">
-          </div>
-          
-          <div class="deal_info">
-            <div style="margin: 0 auto;">
-            <p class="text-lg">${store.deal}</p>
-            </div>
-            <div class="deal_info_price_rating">
-            <p class="text-md">Price:<p class="text-md newprice" style="margin-right:0px">${store.newPrice}$</p> <p class="text-md sale">${store.oldPrice}$</p></p>
-            <p class="text-md">Rating: ${store.rating}</p>
-            <div>
-        </div>
-      `;
+        // Parse the JSON string back to an array
+        var receivedStoreList = getStores();
 
-      storeContainer.appendChild(storeInstance);
-    });
+        var selectedStores = [];
+
+        function handleCheckboxChange(event) {
+            var storeId = parseInt(event.target.getAttribute("data-store-id"), 10);
+            if (event.target.checked) {
+                // Add store to selectedStores array
+                if (selectedStores.length < 2) {
+                    selectedStores.push(receivedStoreList[storeId]);
+                    if (selectedStores.length === 2) {
+                        disableOtherCheckboxes(true);
+                        document.querySelector('.clearStoresBtn').disabled = false;
+                    }
+                } else {
+                    event.target.checked = false;
+                }
+            } else {
+                selectedStores = selectedStores.filter(function (store) {
+                    return store !== receivedStoreList[storeId];
+                });
+                // Enable checkboxes again wehn less than 2 stores selected
+                disableOtherCheckboxes(false);
+                // disable the Clear button when no store get selected
+                if (selectedStores.length === 0) {
+                    document.querySelector('.clearStoresBtn').disabled = true;
+                }
+            }
+        }
+
+        function disableOtherCheckboxes(disabledStatus) {
+            var checkboxes = document.querySelectorAll('.store-checkbox');
+            checkboxes.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    checkbox.disabled = disabledStatus;
+                }
+            });
+        }
+
+        function clearSelectedStores() {
+            selectedStores = [];
+            var checkboxes = document.querySelectorAll('.store-checkbox');
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = false;
+                checkbox.disabled = false;
+            });
+            // Disable the Clear button
+            document.querySelector('.clearStoresBtn').disabled = true;
+        }
+
+        function redirectStoreListPage() {
+            console.log(storeList);
+            var storeListJSON = JSON.stringify(storeList); // Convert the storeList array to a JSON string
+            console.log(storeListJSON);
+            var link = document.createElement("a"); // Create a link with query parameter to another page
+            link.href = "StoreList.html?storeList=" + encodeURIComponent(storeListJSON); // pass the list of stores to StoreList.html
+            link.click();
+        }
+
+        function compareStores() {
+            if (selectedStores.length === 2) {
+                // Calculate differences
+                const distanceDiff = Math.abs(selectedStores[0].distance - selectedStores[1].distance).toFixed(2);
+                const priceLevelDiff = Math.abs(selectedStores[0].price.length - selectedStores[1].price.length);
+                const ratingDiff = Math.abs(selectedStores[0].rating - selectedStores[1].rating).toFixed(1);
+                const actualPriceDiff = Math.abs(selectedStores[0].newPrice - selectedStores[1].newPrice).toFixed(2);
+                // Compare the price
+                let priceDiffMessage = '';
+                if(actualPriceDiff === 0){
+                    priceDiffMessage = 'Both have the same price level.';
+                }
+                else if(selectedStores[0].newPrice < selectedStores[1].newPrice){
+                    priceDiffMessage = `${selectedStores[0].name} is less expensive than ${selectedStores[1].name}. by ${actualPriceDiff} $`  ;
+                }
+                else{
+                    priceDiffMessage = `${selectedStores[1].name} is less expensive than ${selectedStores[0].name}. by ${actualPriceDiff} $`  ;
+                }
+
+                const dealInfo = `
+      <p>Deal of ${selectedStores[0].name}: ${selectedStores[0].deal}</p>
+      <p>Deal of ${selectedStores[1].name}: ${selectedStores[1].deal}</p>
+    `;
+
+                // Create the comparison result
+                const comparisonResultsHtml = `
+      <h3>Comparison Results:</h3>
+      <p><strong>${selectedStores[0].name}</strong> vs <strong>${selectedStores[1].name}</strong></p>
+      <ul>
+        <li>Distance difference: ${distanceDiff} mi</li>
+        <li>Price level difference: ${priceDiffMessage}</li>
+        <li>Rating difference: ${ratingDiff} stars</li>
+      </ul>
+      ${dealInfo}
+    `;
+
+                // Insert the comparison results to show it.
+                const comparisonResultsDiv = document.getElementById('comparisonResults');
+                comparisonResultsDiv.innerHTML = comparisonResultsHtml;
+            } else {
+                comparisonResultsDiv.innerHTML = '<p>Please select exactly two stores to compare.</p>';
+            }
+        }
+
+        var tableBody = document.getElementById("storeTableBody");
+        for (var i = 0; i < receivedStoreList.length; i++) {
+            if (i % 3 === 0) {
+                var row = tableBody.insertRow();
+            }
+            var store = receivedStoreList[i];
+            var cell = row.insertCell();
+            cell.classList.add("smallpad");
+
+            var buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button_div");
+            var button = document.createElement("button");
+            button.textContent = "Remove";
+            buttonContainer.appendChild(button);
+
+            // Create a div for each attribute
+            var nameDiv = document.createElement("div");
+            nameDiv.textContent = "Name: " + store.name;
+            nameDiv.classList.add("store-info");
+
+            var typeDiv = document.createElement("div");
+            typeDiv.textContent = "Type: " + store.type;
+            typeDiv.classList.add("store-info");
+
+            var distanceDiv = document.createElement("div");
+            distanceDiv.textContent = "Distance: " + store.distance + "mi.";
+            distanceDiv.classList.add("store-info");
+
+            var priceDiv = document.createElement("div");
+            priceDiv.textContent = "Price: " + store.newPrice + "$";
+            priceDiv.classList.add("store-info");
+
+            var oldprice = document.createElement("div");
+            oldprice.textContent = "Old Price: " + store.oldPrice + "$";
+            oldprice.classList.add("store-info");
+
+            var ratingDiv = document.createElement("div");
+            ratingDiv.textContent = "Rating: " + store.rating;
+            ratingDiv.classList.add("store-info");
+
+            var DealDiv = document.createElement("div");
+            DealDiv.textContent = "Deal: " + store.deal;
+            DealDiv.classList.add("store-info");
+
+            // Append the divs to the cell
+            cell.appendChild(buttonContainer);
+            cell.appendChild(nameDiv);
+            cell.appendChild(typeDiv);
+            cell.appendChild(distanceDiv);
+            cell.appendChild(priceDiv);
+            cell.appendChild(oldprice);
+            cell.appendChild(ratingDiv);
+            cell.appendChild(DealDiv);
+
+            var checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "store-checkbox";
+            checkbox.setAttribute("data-store-id", i);
+            checkbox.addEventListener('change', handleCheckboxChange);
+            buttonContainer.appendChild(checkbox);
+        }
+
+        function redirectHomePage() { // go to index.html
+            window.location.href = "index.html";
+        }
+        function getSavedLocation(){
+            var decodedCookie = decodeURIComponent($.cookie("location"));
+            // var cookies = decodedCookie.split(';');
+            var prev_cookie = $.cookie("location");
+            if(prev_cookie === undefined){
+                return "";
+            }
+            console.log(decodedCookie, prev_cookie);
+            return decodedCookie;
   }
-  function redirectStoreListPage() {
-      console.log(storeList);
-      var storeListJSON = JSON.stringify(storeList); // Convert the storeList array to a JSON string
-      console.log(storeListJSON);
-      var link = document.createElement("a"); // Create a link with query parameter to another page
-      link.href = "StoreList.html?storeList=" + encodeURIComponent(storeListJSON); // pass the list of stores to StoreList.html
-      link.click();
-    }
-  function compare(first, second){
-    let size_first = first.length;
-    let size_second = second.length;
-    let j = 0;
-    for(let i = 0; i < size_first; ++i){
-      if(first[i] == second[j]){
-        j++;
-      }
-      else{
-        j = 0;
-      }
-      if(j == size_second){
-        return true;
-      }
-    }
-    return false;
-  }
-  $(".search_icon").on("click", function(){
-    let search_box_val = document.getElementById("search_text_field").value;
-    let x = [];
-    for(let i = 0; i < storeList.length; ++i){
-      if(compare(storeList[i].name,search_box_val) || compare(storeList[i].deal,search_box_val)){
-        x.push(storeList[i]);
-      }
-    }
-    console.log(x);
-    populateStoreList(x);
-
-  });
-  $(".clear_icon").on("click", function(){
-    let search_box_val = document.getElementById("search_text_field");
-    search_box_val.value = "";
-    populateStoreList();
-  });
-  
-  $(document).ready(function()
-    {
-      populateStoreList();
-      added_items = getCookies();
-      console.log(added_items);
-      if(added_items.length == 0){
-        console.log("No cookies");
-        $(".highlight-number").css("visibility", "hidden");
-      }
-      else{
-        $(".highlight-number").css("visibility", "visible");
-        $(".highlight-number").text(added_items.length);
-      }
-      let arr = getCookies();
-      console.log(added_items);
-      for(let i = 0; i < arr.length; ++i){
-          let store_id = arr[i];
-          console.log(document.getElementsByClassName("btn"));
-          let html_button = document.querySelector(`[data-id="${store_id}"]`);
-          let tableCell = html_button.closest('td'); // the cell containing the button
-          let action = html_button.getAttribute("data-action");
-          html_button.value = "Remove";
-          html_button.setAttribute('data-action', 'Remove');
-          tableCell.style.borderColor = 'green'; // Set the store border to green to signify the store was added
-      }
-      function success(position) {
+        $(document).ready(function () {
+            added_items = getCookies();
+            console.log(added_items);
+            if (added_items.length == 0) {
+                console.log("No cookies");
+                $(".highlight-number").css("visibility", "hidden");
+            } else {
+                $(".highlight-number").css("visibility", "visible");
+                $(".highlight-number").text(added_items.length);
+            }
+            function success(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
@@ -287,6 +334,8 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                 console.log(data);
                 var address = data.results[0].formatted_address;
                 document.getElementById('CurLocation').textContent = address;
+                $.cookie("location", address);
+                console.log(getSavedLocation());
         });
       }
       function error() {
@@ -310,122 +359,15 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       }
       if (!navigator.geolocation) {
         status.textContent = "Geolocation is not supported by your browser";
-      } else {
+      } else if(getSavedLocation() === ""){
         status.textContent = "Locating…";
         navigator.geolocation.getCurrentPosition(success, error);
       }
-
+      else{
+        document.getElementById('CurLocation').textContent = getSavedLocation();
+      }
     });
-  
-  function update_cookies(){
-      console.log("cookies are being changed");
-    added_items = getCookies();
-    if(added_items.length === 0){
-        console.log("No cookies");
-        $(".highlight-number").css("visibility", "hidden");
-      }
-      else{
-        $(".highlight-number").css("visibility", "visible");
-        $(".highlight-number").text(added_items.length);
-      }
-  }
-  function button_action(id){
-      let elem = document.querySelector(`[data-id="${id}"]`);
-      console.log(elem);
-      let action = elem.getAttribute("data-action");
-      if(action == "Add") {
-          addCookies(id);
-          elem.value = "Remove";
-          elem.setAttribute('data-action', 'Remove');
-          Toastify({
-          text: "You have added an item " + storeList[id].deal + " to your shopping list!",
-          offset: {
-           y: 80 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-          duration: 3000,
-          newWindow: true,
-          close: true,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-           background: "#5cb85c",
-          },
-          onClick: function(){} // Callback after click
-          }).showToast();
-      }
-      else{
-          deleteCookie(id);
-          Toastify({
-          text: "You have deleted an item " + storeList[id].deal + " from your shopping list!",
-          offset: {
-           y: 80 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-          duration: 3000,
-          newWindow: true,
-          close: true,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-           background: "#5cb85c",
-          },
-          onClick: function(){} // Callback after click
-          }).showToast();
-          elem.value = "Add";
-          elem.setAttribute('data-action', 'Add');
-      }
-      update_cookies();
-  }
-$("#distance").on("click", function(){
-    let temp = [...storeList]; // Create a copy of storeList
-    temp.sort((a, b) => a.distance - b.distance); // Sort by distance
-    populateStoreList(temp);
-  });
-$("#savings").on("click", function(){
-    let temp = [...storeList]; // Create a copy of storeList
-    temp.sort((a, b) => -(a.oldPrice - a.newPrice) + (b.oldPrice - b.newPrice)); // Sort by savings
-    populateStoreList(temp);
-  });
-$("#rating").on("click", function(){
-    let temp = [...storeList]; // Create a copy of storeList
-    temp.sort((a, b) => -a.rating + b.rating); // Sort by rating
-    populateStoreList(temp);
-});
-$("#clearall").on("click", function(){
-    populateStoreList();
-});
-$("#dollar1").on("click", function(){
-  let search_box_val = document.getElementById("search_text_field").value;
-  let x = [];
-  for(let i = 0; i < storeList.length; ++i){
-    if(storeList[i].price === "$"){
-      x.push(storeList[i]);
-    }
-  }
-  populateStoreList(x);
-});
-$("#dollar2").on("click", function(){
-  let search_box_val = document.getElementById("search_text_field").value;
-  let x = [];
-  for(let i = 0; i < storeList.length; ++i){
-    if(storeList[i].price === "$$"){
-      x.push(storeList[i]);
-    }
-  }
-  populateStoreList(x);
-});
-$("#dollar3").on("click", function(){
-  let search_box_val = document.getElementById("search_text_field").value;
-  let x = [];
-  for(let i = 0; i < storeList.length; ++i){
-    if(storeList[i].price === "$$$"){
-      x.push(storeList[i]);
-    }
-  }
-  populateStoreList(x);
-});
-</script>
+    </script>
 </body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </html>
