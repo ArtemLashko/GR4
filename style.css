@@ -255,19 +255,20 @@ td {
 }
 
 .highlight-number {
-  position: absolute;
-  right: 12px;
-  bottom: 14px;
+  position: relative;
+  top:-50px;
+  right:-19px;
   color: red;
   font-weight: bold;
   /* background-color: rgba(128, 128, 128, 0.5); */
   /*box-shadow: 1px 1px 1px 1px gray;*/
   /* border: 2px solid black; Add this line */
   /* Add padding, margin, etc. as needed */
-  background-color: var(--color-surface-mixed-100);
   opacity: 0.9;
 }
-
+td.smallpad{
+  background-color: var(--color-surface-200);
+}
 #storeTableBody td {
   width: 300px;
   padding-bottom: 10px;
