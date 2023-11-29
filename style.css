@@ -443,3 +443,6 @@ td {
   color:green;
   font-size: 1.3rem !important;
 }
+td.smallpad{
+  background-color: var(--color-surface-200);
+}
