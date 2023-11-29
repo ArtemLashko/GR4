@@ -219,12 +219,35 @@ td {
   touch-action: manipulation;
   width: auto;
 }
-
-
 .btn:hover {
   background-color: darkgray;
 }
 
+.btnlist {
+  z-index: 1;
+  background-color: var(--color-surface-300);
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: "Roboto","DM Sans","Segoe UI",sans-serif;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+}
+.btnlist:hover {
+  background-color: darkgray;
+}
 #layout {
   padding: 50px;
   border-spacing: 50px;
@@ -445,4 +468,17 @@ td {
 }
 td.smallpad{
   background-color: var(--color-surface-200);
+}
+#CompareContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  min-width: 300px;
+  min-height: 100vh;
+  background-color: var(--color-surface-100);
+  gap: -2x;
+}
+#clearbutton{
+  background-color: #8b8b8b;
 }
