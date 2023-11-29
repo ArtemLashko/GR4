@@ -8,9 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600&family=Roboto:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLvMkhCK_F3O0YTLxillLMsWkcgegrES4"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src=
+"https://code.jquery.com/jquery-3.5.1.min.js"
+integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+         crossorigin= "anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src=
+  "https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.2/seedrandom.js">
+</script>
 <title>Your Store List</title>
 </head>
 
@@ -49,33 +56,35 @@
         </div>
       </div>
       <hr>
-    <div>
-        <input type="button" onclick="compareStores()" value="Compare" class="compareBtn">
-        <input type="button" onclick="clearSelectedStores()" value="Clear" class="clearStoresBtn" disabled>
+    <div id="MainPage">
+        <div id="ItemsContent">
+            <div id="CompareContainer">
+                <div id="comparisonResults">
+                    <p>Select two items, and press compare.</p>
+                </div>
+                <div>
+                    <input type="button" onclick="compareStores()" value="Compare" class="btnlist">
+                    <input type="button" id="clearbutton" onclick="clearSelectedStores()" value="Clear" class="btnlist" disabled>
+                </div>
+            </div>
+            <div id="storeContainer">
+
+            </div>
+        </div>
     </div>
-
-    <div id="comparisonResults"></div>
-
-    <div>
-        <table id="layout">
-            <tbody id="storeTableBody">
-                <!-- Will be populated wiuth JS below -->
-            </tbody>
-        </table>
-    </div>
-
     <script>
         // Retrieve the storeList from the query parameter
-        var store1 = new Store("Target", "Franchise", 5, "$$", 4.1, "Bread", 2.99, 1.99);
-    var store2 = new Store("Walmart", "Franchise", 2, "$", 4.0, "Eggs", 5.4, 4.3);
-    var store3 = new Store("Target", "Franchise", 4, "$$", 3.2, "Noodles", 4.29, 3.99);
-    var store4 = new Store("Dollar_Tree", "Local", 5, "$$$", 4.4, "Milk", 3.99, 2.85);
-    var store5 = new Store("Target", "Franchise", 6, "$", 4.8, "Eggs", 5.69, 3.5);
-    var store6 = new Store("7_Eleven", "Franchise", 7, "$$", 2.0, "Chips", 3.00, 2.19);
-    var store7 = new Store("Walmart", "Local", 10, "$$", 3.3, "Candy", 3.45, 1.99);
-    var store8 = new Store("Walmart", "Franchise", 8, "$$$", 2.1, "Cheese", 13.63, 9.99);
-    var store9 = new Store("7_Eleven", "Local", 3, "$", 3.9, "Tomato", 3.4, 2.99);
-        var storeList = [store1, store2, store3, store4, store5, store6, store7, store8, store9]; // Create a list of stores using an array
+    // Create instances of stores
+    var store1 = new Store("Target", "Franchise", 5, "$$", 4.1, "Bread", 2.99, 1.99, 0);
+    var store2 = new Store("Walmart", "Franchise", 2, "$", 4.0, "Eggs", 5.4, 4.3, 1);
+    var store3 = new Store("Target", "Franchise", 4, "$$", 3.2, "Noodles", 4.29, 3.99, 2);
+    var store4 = new Store("Dollar_Tree", "Local", 5, "$$$", 4.4, "Milk", 3.99, 2.85, 3);
+    var store5 = new Store("Target", "Franchise", 6, "$", 4.8, "Eggs", 5.69, 3.5, 4);
+    var store6 = new Store("7_Eleven", "Franchise", 7, "$$", 2.0, "Chips", 3.00, 2.19, 5);
+    var store7 = new Store("Walmart", "Local", 10, "$$", 3.3, "Candy", 3.45, 1.99, 6);
+    var store8 = new Store("Walmart", "Franchise", 8, "$$$", 2.1, "Cheese", 13.63, 9.99, 7);
+    var store9 = new Store("7_Eleven", "Local", 3, "$", 3.9, "Tomato", 3.4, 2.99, 8);
+    var storeList = [store1, store2, store3, store4, store5, store6, store7, store8, store9]; // Create a list of stores using an array
         var added_items = [];
         function addCookies(id) {
             id = id.toString();
@@ -108,6 +117,28 @@
             }
             return cookies;
         }
+        function deleteCookie(id) {
+        id = id.toString();
+        var prev_cookie = $.cookie("id");
+
+        if (prev_cookie === undefined) {
+            return;
+        }
+
+        var cookies = getCookies();
+        var index = cookies.indexOf(id);
+
+        if (index !== -1) {
+            cookies.splice(index, 1);
+            if(cookies.length === 0){
+                $.removeCookie("id");
+            }
+            else {
+                $.cookie("id", cookies.join(';'));
+            }
+            update_cookies(); // Call your update_cookies function if needed
+        }
+    }
         function getStores() {
             let list = getCookies();
             let store_list = [];
@@ -116,7 +147,7 @@
             }
             return store_list;
         }
-        function Store(name, type, distance, price, rating, deal, oldPrice, newPrice) { // Constructor function for a store
+        function Store(name, type, distance, price, rating, deal, oldPrice, newPrice, id) { // Constructor function for a store
             this.name = name;
             this.type = type;
             this.distance = distance;
@@ -125,50 +156,19 @@
             this.deal = deal;
             this.oldPrice = oldPrice;
             this.newPrice = newPrice;
+            this.id = id;
         }
+    
         var queryString = window.location.search;
         var urlParams = new URLSearchParams(queryString);
         var storeListJSON = urlParams.get('storeList');
 
         // Parse the JSON string back to an array
         var receivedStoreList = getStores();
+        // var receivedStoreList = storeList;
+        var selectedStores = [-1, -1];
 
-        var selectedStores = [];
-
-        function handleCheckboxChange(event) {
-            var storeId = parseInt(event.target.getAttribute("data-store-id"), 10);
-            if (event.target.checked) {
-                // Add store to selectedStores array
-                if (selectedStores.length < 2) {
-                    selectedStores.push(receivedStoreList[storeId]);
-                    if (selectedStores.length === 2) {
-                        disableOtherCheckboxes(true);
-                        document.querySelector('.clearStoresBtn').disabled = false;
-                    }
-                } else {
-                    event.target.checked = false;
-                }
-            } else {
-                selectedStores = selectedStores.filter(function (store) {
-                    return store !== receivedStoreList[storeId];
-                });
-                // Enable checkboxes again wehn less than 2 stores selected
-                disableOtherCheckboxes(false);
-                // disable the Clear button when no store get selected
-                if (selectedStores.length === 0) {
-                    document.querySelector('.clearStoresBtn').disabled = true;
-                }
-            }
-        }
-
-        function disableOtherCheckboxes(disabledStatus) {
-            var checkboxes = document.querySelectorAll('.store-checkbox');
-            checkboxes.forEach(function (checkbox) {
-                if (!checkbox.checked) {
-                    checkbox.disabled = disabledStatus;
-                }
-            });
-        }
+        let selectedStoresCounter = 0;
 
         function clearSelectedStores() {
             selectedStores = [];
@@ -189,112 +189,166 @@
             link.href = "StoreList.html?storeList=" + encodeURIComponent(storeListJSON); // pass the list of stores to StoreList.html
             link.click();
         }
-
-        function compareStores() {
-            if (selectedStores.length === 2) {
-                // Calculate differences
-                const distanceDiff = Math.abs(selectedStores[0].distance - selectedStores[1].distance).toFixed(2);
-                const priceLevelDiff = Math.abs(selectedStores[0].price.length - selectedStores[1].price.length);
-                const ratingDiff = Math.abs(selectedStores[0].rating - selectedStores[1].rating).toFixed(1);
-                const actualPriceDiff = Math.abs(selectedStores[0].newPrice - selectedStores[1].newPrice).toFixed(2);
-                // Compare the price
-                let priceDiffMessage = '';
-                if(actualPriceDiff === 0){
-                    priceDiffMessage = 'Both have the same price level.';
-                }
-                else if(selectedStores[0].newPrice < selectedStores[1].newPrice){
-                    priceDiffMessage = `${selectedStores[0].name} is less expensive than ${selectedStores[1].name}. by ${actualPriceDiff} $`  ;
+        function button_action(id){
+            let elem = document.querySelector(`[data-id="${id}"]`);
+            let action = elem.getAttribute("data-action");
+            let temp = document.querySelector(`[data-id="${id}"]`);
+            document.getElementById("comparisonResults").innerHTML = "";
+            if(action == "Select"){
+                // we need to make sure that we can't select more than 2 stores
+                temp.setAttribute("data-action", "Unselect");
+                temp.value = "Unselect";
+                selectedStoresCounter++;
+                if(selectedStores[0] == -1){
+                    selectedStores[0] = id;
                 }
                 else{
-                    priceDiffMessage = `${selectedStores[1].name} is less expensive than ${selectedStores[0].name}. by ${actualPriceDiff} $`  ;
+                    selectedStores[1] = id;
+                }
+                if(selectedStoresCounter == 2){
+                    for(let i = 0; i < receivedStoreList.length; i++){
+                        if(receivedStoreList[i].id != selectedStores[0] && receivedStoreList[i].id != selectedStores[1]){
+                            let temp = document.querySelector(`[data-id="${i}"]`);
+                            // make a button non clickable
+                            temp.disabled = true; // Make the button unclickable
+                            temp.style.opacity = "0";
+                        }
+                    }
+                    var clearButton = document.getElementById('clearbutton');
+                    clearButton.disabled = false;
+                    clearButton.style.backgroundColor = '#3f3f3f';
                 }
 
-                const dealInfo = `
-      <p>Deal of ${selectedStores[0].name}: ${selectedStores[0].deal}</p>
-      <p>Deal of ${selectedStores[1].name}: ${selectedStores[1].deal}</p>
-    `;
-
-                // Create the comparison result
-                const comparisonResultsHtml = `
-      <h3>Comparison Results:</h3>
-      <p><strong>${selectedStores[0].name}</strong> vs <strong>${selectedStores[1].name}</strong></p>
-      <ul>
-        <li>Distance difference: ${distanceDiff} mi</li>
-        <li>Price level difference: ${priceDiffMessage}</li>
-        <li>Rating difference: ${ratingDiff} stars</li>
-      </ul>
-      ${dealInfo}
-    `;
-
-                // Insert the comparison results to show it.
-                const comparisonResultsDiv = document.getElementById('comparisonResults');
-                comparisonResultsDiv.innerHTML = comparisonResultsHtml;
-            } else {
-                comparisonResultsDiv.innerHTML = '<p>Please select exactly two stores to compare.</p>';
             }
-        }
-
-        var tableBody = document.getElementById("storeTableBody");
-        for (var i = 0; i < receivedStoreList.length; i++) {
-            if (i % 3 === 0) {
-                var row = tableBody.insertRow();
+            else{
+                temp.setAttribute("data-action", "Select");
+                temp.value = "Select";
+                var clearButton = document.getElementById('clearbutton');
+                clearButton.disabled = true;
+                clearButton.style.backgroundColor = '#8b8b8b';
+                if(selectedStoresCounter == 2){
+                    for(let i = 0; i < receivedStoreList.length; i++){
+                            let temp = document.querySelector(`[data-id="${i}"]`);
+                            // make a button non clickable
+                            temp.disabled = false; // Make the button clickable
+                            temp.style.opacity = "1";
+                        }
+                }
+                if(selectedStores[0] == id){
+                    selectedStores[0] = -1;
+                }
+                else{
+                    selectedStores[1] = -1;
+                }
+                selectedStoresCounter--;
             }
-            var store = receivedStoreList[i];
-            var cell = row.insertCell();
-            cell.classList.add("smallpad");
-
-            var buttonContainer = document.createElement("div");
-            buttonContainer.classList.add("button_div");
-            var button = document.createElement("button");
-            button.textContent = "Remove";
-            buttonContainer.appendChild(button);
-
-            // Create a div for each attribute
-            var nameDiv = document.createElement("div");
-            nameDiv.textContent = "Name: " + store.name;
-            nameDiv.classList.add("store-info");
-
-            var typeDiv = document.createElement("div");
-            typeDiv.textContent = "Type: " + store.type;
-            typeDiv.classList.add("store-info");
-
-            var distanceDiv = document.createElement("div");
-            distanceDiv.textContent = "Distance: " + store.distance + "mi.";
-            distanceDiv.classList.add("store-info");
-
-            var priceDiv = document.createElement("div");
-            priceDiv.textContent = "Price: " + store.newPrice + "$";
-            priceDiv.classList.add("store-info");
-
-            var oldprice = document.createElement("div");
-            oldprice.textContent = "Old Price: " + store.oldPrice + "$";
-            oldprice.classList.add("store-info");
-
-            var ratingDiv = document.createElement("div");
-            ratingDiv.textContent = "Rating: " + store.rating;
-            ratingDiv.classList.add("store-info");
-
-            var DealDiv = document.createElement("div");
-            DealDiv.textContent = "Deal: " + store.deal;
-            DealDiv.classList.add("store-info");
-
-            // Append the divs to the cell
-            cell.appendChild(buttonContainer);
-            cell.appendChild(nameDiv);
-            cell.appendChild(typeDiv);
-            cell.appendChild(distanceDiv);
-            cell.appendChild(priceDiv);
-            cell.appendChild(oldprice);
-            cell.appendChild(ratingDiv);
-            cell.appendChild(DealDiv);
-
-            var checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.className = "store-checkbox";
-            checkbox.setAttribute("data-store-id", i);
-            checkbox.addEventListener('change', handleCheckboxChange);
-            buttonContainer.appendChild(checkbox);
+            console.log(selectedStores, selectedStoresCounter);
         }
+        function clearSelectedStores(){
+            document.getElementById("comparisonResults").innerHTML = "";
+            selectedStores = [-1, -1];
+            selectedStoresCounter = 0;
+            console.log("here");
+            for(let i = 0; i < receivedStoreList.length; i++){
+                let temp = document.querySelector(`[data-id="${i}"]`);
+                temp.setAttribute("data-action", "Select");
+                temp.value = "Select";
+                // make a button non clickable
+                temp.disabled = false; // Make the button clickable
+                temp.style.opacity = "1";
+            }
+            var clearButton = document.getElementById('clearbutton');
+                clearButton.disabled = true;
+                clearButton.style.backgroundColor = '#8b8b8b';
+        }
+        function compareStores() {
+            let store1 = receivedStoreList[selectedStores[0]];
+            let store2 = receivedStoreList[selectedStores[1]];
+            const distanceDiff = Math.abs(store1.distance - store2.distance).toFixed(2);
+            const priceLevelDiff = Math.abs(store1.price.length - store2.price.length);
+            const ratingDiff = Math.abs(store1.rating - store2.rating).toFixed(1);
+            const actualPriceDiff = Math.abs(store1.newPrice - store2.newPrice).toFixed(2);
+            // Compare the price
+            let priceDiffMessage = '';
+            if(actualPriceDiff < 0.00000001){
+                priceDiffMessage = 'Both have the same price level.';
+            }
+            else if(store1.newPrice < selectedStores[1].newPrice){
+                priceDiffMessage = `${store1.name} is less expensive than ${store2.name}. by ${actualPriceDiff} $`  ;
+            }
+            else{
+                priceDiffMessage = `${store2.name} is less expensive than ${store1.name}. by ${actualPriceDiff} $`  ;
+            }
+            let ratingDiffMessage = '';
+            if(ratingDiff < 0.00000001){
+                ratingDiffMessage = 'Both have the same rating.';
+            }
+            else if(store1.rating > store2.rating){
+                ratingDiffMessage = `${store1.name} has a higher rating than ${store2.name} by ${ratingDiff} stars.`;
+            }
+            else{
+                ratingDiffMessage = `${store2.name} has a higher rating than ${store1.name} by ${ratingDiff} stars.`;
+            }
+            let distanceDiffMessage = '';
+            if(distanceDiff < 0.00000001){
+                distanceDiffMessage = 'Both are at the same distance.';
+            }
+            else if(store1.distance < store2.distance){
+                distanceDiffMessage = `${store1.name} is closer than ${store2.name} by ${distanceDiff} mi.`;
+            }
+            else{
+                distanceDiffMessage = `${store2.name} is closer than ${store1.name} by ${distanceDiff} mi.`;
+            }
+            const dealInfo = `
+            <p>Deal of ${store1.name}: ${store1.deal} for ${store1.newPrice}$</p>
+            <p>Deal of ${store2.name}: ${store2.deal} for ${store2.newPrice}$</p>
+            <ul>
+                <li>${distanceDiffMessage}</li>
+                <li>${priceDiffMessage}</li>
+                <li>${ratingDiffMessage} stars</li>
+            </ul>`;
+            let temp  = document.getElementById("comparisonResults");
+            temp.innerHTML = dealInfo;
+            }
+
+    $("#storeContainer").empty();
+    const storeContainer = document.getElementById('storeContainer');
+    console.log(storeContainer);
+    // let currentRow; // Initialize a variable to keep track of the current row
+    receivedStoreList.forEach((store, index) => {
+      // if (index % 4 === 0) {
+      //   // Start a new row for every third store
+      //   storeContainer.appendChild(currentRow);
+      // }
+
+      const storeInstance = document.createElement('div');
+      storeInstance.className = 'store_card';
+      // storeInstance.id = 'insideBox';
+      storeInstance.innerHTML = `
+          <div class = "store_card_image_${store.name}">
+            <div class="store_info_image">
+            <p class="text-md">${store.name}</p>
+            <p class="text-md">${store.distance} miles</p>
+            </div>
+          </div>
+          <hr>
+          <div class="button_div">
+            <input type="button" class="btn" value="Select" data-action="Select" data-id = "${store.id}" onclick = "button_action(${store.id})">
+          </div>
+          
+          <div class="deal_info">
+            <div style="margin: 0 auto;">
+            <p class="text-lg">${store.deal}</p>
+            </div>
+            <div class="deal_info_price_rating">
+            <p class="text-md">Price:<p class="text-md newprice" style="margin-right:0px">${store.newPrice}$</p> <p class="text-md sale">${store.oldPrice}$</p></p>
+            <p class="text-md">Rating: ${store.rating}</p>
+            <div>
+        </div>
+      `;
+
+      storeContainer.appendChild(storeInstance);
+        });
 
         function redirectHomePage() { // go to index.html
             window.location.href = "index.html";
@@ -308,7 +362,7 @@
             }
             console.log(decodedCookie, prev_cookie);
             return decodedCookie;
-  }
+        }
         $(document).ready(function () {
             added_items = getCookies();
             console.log(added_items);
