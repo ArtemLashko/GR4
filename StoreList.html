@@ -251,8 +251,16 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                 clearButton.style.backgroundColor = '#8b8b8b';
         }
         function compareStores() {
-            let store1 = receivedStoreList[selectedStores[0]];
-            let store2 = receivedStoreList[selectedStores[1]];
+            let store1;
+            let store2;
+            for(let i = 0; i < receivedStoreList.length; i++){
+                if(receivedStoreList[i].id == selectedStores[0]){
+                    store1 = receivedStoreList[i];
+                }
+                if(receivedStoreList[i].id == selectedStores[1]){
+                    store2 = receivedStoreList[i];
+                }
+            }
             const distanceDiff = Math.abs(store1.distance - store2.distance).toFixed(2);
             const priceLevelDiff = Math.abs(store1.price.length - store2.price.length);
             const ratingDiff = Math.abs(store1.rating - store2.rating).toFixed(1);
