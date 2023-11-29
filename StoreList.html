@@ -197,7 +197,7 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                 if(selectedStoresCounter == 2){
                     for(let i = 0; i < receivedStoreList.length; i++){
                         if(receivedStoreList[i].id != selectedStores[0] && receivedStoreList[i].id != selectedStores[1]){
-                            let temp = document.querySelector(`[data-id="${i}"]`);
+                            let temp = document.querySelector(`[data-id="${receivedStoreList[i].id}"]`);
                             // make a button non clickable
                             temp.disabled = true; // Make the button unclickable
                             temp.style.opacity = "0";
@@ -217,7 +217,7 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                 clearButton.style.backgroundColor = '#8b8b8b';
                 if(selectedStoresCounter == 2){
                     for(let i = 0; i < receivedStoreList.length; i++){
-                            let temp = document.querySelector(`[data-id="${i}"]`);
+                            let temp = document.querySelector(`[data-id="${receivedStoreList[i].id}"]`);
                             // make a button non clickable
                             temp.disabled = false; // Make the button clickable
                             temp.style.opacity = "1";
