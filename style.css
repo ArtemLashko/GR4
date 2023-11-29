@@ -266,9 +266,7 @@ td {
   /* Add padding, margin, etc. as needed */
   opacity: 0.9;
 }
-td.smallpad{
-  background-color: var(--color-surface-200);
-}
+
 #storeTableBody td {
   width: 300px;
   padding-bottom: 10px;
@@ -430,6 +428,7 @@ td.smallpad{
   text-decoration: underline;
 }
 #buttonarray{
+  margin-top: 7px;
   display: flex;
   flex-direction: row;
   gap: 10px;
