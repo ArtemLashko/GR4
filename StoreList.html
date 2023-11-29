@@ -170,17 +170,6 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 
         let selectedStoresCounter = 0;
 
-        function clearSelectedStores() {
-            selectedStores = [];
-            var checkboxes = document.querySelectorAll('.store-checkbox');
-            checkboxes.forEach(function (checkbox) {
-                checkbox.checked = false;
-                checkbox.disabled = false;
-            });
-            // Disable the Clear button
-            document.querySelector('.clearStoresBtn').disabled = true;
-        }
-
         function redirectStoreListPage() {
             console.log(storeList);
             var storeListJSON = JSON.stringify(storeList); // Convert the storeList array to a JSON string
@@ -193,7 +182,7 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
             let elem = document.querySelector(`[data-id="${id}"]`);
             let action = elem.getAttribute("data-action");
             let temp = document.querySelector(`[data-id="${id}"]`);
-            document.getElementById("comparisonResults").innerHTML = "";
+            document.getElementById("comparisonResults").innerHTML = "<p>Select two items, and press compare.</p>";
             if(action == "Select"){
                 // we need to make sure that we can't select more than 2 stores
                 temp.setAttribute("data-action", "Unselect");
@@ -245,7 +234,7 @@ integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
             console.log(selectedStores, selectedStoresCounter);
         }
         function clearSelectedStores(){
-            document.getElementById("comparisonResults").innerHTML = "";
+            document.getElementById("comparisonResults").innerHTML = "<p>Select two items, and press compare.</p>";
             selectedStores = [-1, -1];
             selectedStoresCounter = 0;
             console.log("here");
